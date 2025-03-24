@@ -1,0 +1,53 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+        jf.setLocation(100,200);
+
+        JPopupMenu pm = new JPopupMenu("Menü");
+        JMenuItem cut = new JMenuItem("Kes");
+        JMenuItem copy = new JMenuItem("Kopyala");
+        JMenuItem paste = new JMenuItem("Yapıştır");
+        pm.add(cut);
+        pm.add(copy);
+        pm.add(paste); 
+
+        jf.addMouseListener ( new MouseListener() {
+            @Override
+            public void mouseReleased (MouseEvent e) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void mousePressed (MouseEvent e) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void mouseExited (MouseEvent e) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void mouseEntered (MouseEvent e) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                // TODO Auto-generated method stub
+                pm.show(jf, e.getX(),e.getY());
+            }
+        });
+
+        cut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                JOptionPane.showMessageDialog(jf, "Kes butonu seçildi");
+            }
+        });
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}

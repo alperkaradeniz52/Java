@@ -1,0 +1,55 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+
+        int vize, odev, finall;
+        String svize= JOptionPane. showInputDialog("Lütfen vize notunu giriniz");
+        vize = Integer.parseInt(sVize);
+        while(vize<0 || vize>100)
+        {
+            sVize JOptionPane. showInputDialog(null, "Lütfen Vize notunu giriniz", "vize", JOptionPane.WARNING_MESSAGE);
+            vize Integer.parseInt(sVize);
+        }
+
+        String sOdev= JOptionPane. showInputDialog("Lütfen ödev notunu giriniz");
+        odev = Integer.parseInt(sOdev);
+        while(odev<0 || odev>100)
+        {
+            sOdev JOptionPane. showInputDialog(null, "Lütfen Odev notunu giriniz", "odev", JOptionPane.WARNING_MESSAGE);
+            odev Integer.parseInt(sOdev);
+        }
+
+        String sFinal= JOptionPane. showInputDialog("Lütfen final notunu giriniz");
+        final1 = Integer.parseInt(sFinal);
+        while(final1<0 || final1>100)
+        {
+            sFinal JOptionPane. showInputDialog(null, "Lütfen Final notunu giriniz", "final", JOptionPane.WARNING_MESSAGE);
+            final1 Integer.parseInt(sFinal);
+        }
+
+        double notort= vize*0.3+odev*0.2+final1*0.5;
+        String sonuc = "";
+        if (notOrt>50)
+        {
+            sonuc=notOrt + " Geçti";
+        }
+        else
+            sonuc= notOrt + " Kaldı";
+        JOptionPane.showMessageDialog(null, sonuc);
+
+        JFrame jf = new Jframe();
+
+        jf.setTitle('ilk ders');
+
+        jf.setLocation(100,200);
+
+        jf.getContentPane().setLayout(new FlowLayout());       
+
+
+        jf.setResizable(false);
+
+        jf.setVisible(true);
+        js.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}

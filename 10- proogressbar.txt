@@ -1,0 +1,36 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+        jf.setLocation(100,200);
+
+        JProgressBar pb= new JProgressBar(0,2000);
+        pb.setBounds(50, 50, 160, 40);
+        pb.setValue(0);
+        pb.setStringPainted(true);
+        jf.add(pb);
+
+        jf.add(pb);
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        int i=0;
+        while(i<=2000)
+        {
+            pb.setValue(i);
+            i=i+20;
+
+            try {
+                Thread. steep(100);
+            } 
+            catch (InterruptedException e) { // TODO: handle exception
+                e.printStackTrace();
+            }
+            
+        }
+        
+    }
+}

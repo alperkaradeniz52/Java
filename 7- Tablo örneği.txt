@@ -1,0 +1,18 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+        jf.setLocation(100,200);
+        String [][] veri = { {"1", "Alper Karadeniz", "Giresun"}, {"2", "Eliz", "Ordu"}, {"3", "Aras", "Trabzon}"}}
+        String [] baslik= {"Numara", "İsim", "Memleket"};
+        JTable tablo = new JTable(veri,baslik);
+        JScrollPane sp  = new JScrollPane(tablo);
+        jf.add(sp);
+        jf.setLayout(new FlowLayout());
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}

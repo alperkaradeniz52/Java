@@ -1,0 +1,140 @@
+## MySQL, Connector Kurulumu ve Eclipse'e Entegrasyonu
+
+Bu kılavuz, öğrencilerin Java ile MySQL bağlantısı kurabilmeleri için gerekli olan tüm adımları detaylı bir şekilde açıklar. Her adım, birebir uygulanabilir biçimde anlatılmıştır.
+
+### 1. MySQL Kurulumu
+
+#### a. MySQL Installer İndirme
+- [https://dev.mysql.com/downloads/installer/](https://dev.mysql.com/downloads/installer/) adresine gidin.
+- "Windows (x86, 32-bit), MSI Installer" sürümünü indirin.
+
+#### b. Kurulum Adımları
+1. İndirilen .msi dosyasını çalıştırın.
+2. "Developer Default" seçeneğini işaretleyin ve Next butonuna tıklayın.
+3. Gerekli bileşenler indirilecek ve kurulacaktır.
+4. Root şifresini belirleyin. Bu şifreyi unutmayın!
+5. Port olarak 3306 kullanıldığından emin olun.
+6. Kurulum tamamlandıktan sonra Workbench ve MySQL Server yüklenecektir.
+
+### 2. MySQL Workbench Kullanarak Veritabanı Oluşturma
+
+#### a. Workbench'i Açın
+- Başlat menüsünden MySQL Workbench'i çalıştırın.
+
+#### b. Yeni Veritabanı (Schema) Oluşturma
+1. Sol üstteki "SCHEMAS" bölümünde sağ tıklayın ve "Create Schema" seçin.
+2. Örneğin, "okul" adında bir veritabanı oluşturun.
+3. Apply butonuna tıklayarak işlemi tamamlayın.
+
+#### c. Tablo Oluşturma
+1. "okul" veritabanı altında Tables bölümüne sağ tıklayın, "Create Table" seçin.
+2. Tablonun adını "ogrenci" yapın.
+3. Aşağıdaki sütunları oluşturun:
+   - ogr_no (INT, Primary Key)
+   - ogr_ad (VARCHAR)
+   - ogr_memleket (VARCHAR)
+   - ogr_yas (INT)
+4. Apply diyerek tabloyu oluşturun.
+
+### 3. MySQL Connector Kurulumu ve Eclipse'e Eklenmesi
+
+#### a. Connector J İndirme
+- [https://dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/) adresinden platform bağımsız ZIP dosyasını indirin.
+
+#### b. Eclipse Projesine Eklemek
+1. Eclipse'te Java projenizi açın.
+2. Projenin üzerinde sağ tıklayıp "Build Path > Configure Build Path" seçin.
+3. Libraries sekmesinde "Add External JARs" butonuna tıklayın.
+4. İndirdiğiniz Connector J klasöründen `.jar` dosyasını seçin.
+5. Apply ve Close butonlarına tıklayarak işlemi tamamlayın.
+
+### 4. Java Kodları
+
+#### a. Bağlantı Kurulumu
+```java
+String url = "jdbc:mysql://localhost:3306/okul";
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection con = DriverManager.getConnection(url, "root", "1234");
+```
+
+#### b. Bağlantı Kontrolü
+```java
+if (con != null) {
+    System.out.println("Bağlantı başarılı");
+} else {
+    System.out.println("Bağlantı başarısız");
+}
+```
+
+#### c. Textbox Verilerini Alma
+```java
+String tAd = txtAd.getText();
+String tMemleket = txtMemleket.getText();
+String tYas = txtYas.getText();
+int tNo = Integer.parseInt(txtNo.getText());
+```
+
+#### d. Veri Getirme (Select)
+```java
+public void bul() {
+    Statement st = con.createStatement();
+    String sorgu = "SELECT * FROM ogrenci WHERE ogr_no = '" + txtNo.getText() + "'";
+    ResultSet res = st.executeQuery(sorgu);
+
+    if (res.next()) {
+        txtAd.setText(res.getString("ogr_ad"));
+        txtMemleket.setText(res.getString("ogr_memleket"));
+        txtYas.setText(res.getString("ogr_yas"));
+    }
+}
+```
+
+#### e. Veri Ekleme (Insert)
+```java
+public void ekle() {
+    int tNo = Integer.parseInt(txtNo.getText());
+    String tAd = txtAd.getText();
+    String tMemleket = txtMemleket.getText();
+    String tYas = txtYas.getText();
+
+    String sorgu = "INSERT INTO ogrenci VALUES('" + tNo + "','" + tAd + "','" + tMemleket + "','" + tYas + "')";
+    Statement st = con.createStatement();
+    st.execute(sorgu);
+}
+```
+
+#### f. Veri Silme (Delete)
+```java
+public void sil() {
+    String sorgu = "DELETE FROM ogrenci WHERE ogr_no = '" + txtNo.getText() + "'";
+    Statement st = con.createStatement();
+    st.execute(sorgu);
+}
+```
+
+#### g. Veri Güncelleme (Update)
+```java
+public void guncelle() {
+    String sorgu = "UPDATE ogrenci SET ogr_ad='" + txtAd.getText() + "', ogr_memleket='" + txtMemleket.getText() + "', ogr_yas='" + txtYas.getText() + "' WHERE ogr_no='" + txtNo.getText() + "'";
+    Statement st = con.createStatement();
+    st.execute(sorgu);
+}
+```
+
+### 5. Basit Form Arayüzü (Java Swing ile)
+
+#### a. Form Bileşenleri
+- JLabel: "Öğrenci No", "Ad", "Memleket", "Yaş"
+- JTextField: txtNo, txtAd, txtMemleket, txtYas
+- JButton: btnEkle, btnSil, btnGuncelle, btnBul
+
+#### b. Buton İşlemleri
+- btnEkle: ekle() metodunu çağırır.
+- btnSil: sil() metodunu çağırır.
+- btnGuncelle: guncelle() metodunu çağırır.
+- btnBul: bul() metodunu çağırır.
+
+Bu formda kullanıcı, bilgileri girip işlemleri gerçekleştirebilir. Form Java Swing ile tasarlanmalı ve olay dinleyicileri (ActionListener) her butona eklenmelidir.
+
+Bu adımlar tamamlandığında, kullanıcılar MySQL ile entegre çalışan bir Java uygulaması geliştirebilir.
+

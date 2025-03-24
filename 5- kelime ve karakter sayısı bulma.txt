@@ -1,0 +1,44 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+		
+		// girilen metnin kelime ve karakter sayısı hesaplama
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+
+        jf.setLocation(100,200);
+
+        jf.getContentPane().setLayout(new FlowLayout());
+
+        JButton btn1= new JButton("Gönder");
+
+        jf.getContentPane().add(btn1);
+
+        JTextArea ar1= new JTextArea();  // bu compenent çoklu satırda yazmak için kullanılır.
+        ar1.setText("buraya yaz");
+
+        JLabel lblKelime= new JLabel();
+        JLabel lblmetin= new JLabel();
+
+        JPasswordField pass = new JPasswordField(20); // şifre için kullanılan companent
+
+        jf.getContentPane().add(ar1);
+        jf.getContentPane().add(lblkelime);
+        jf.getContentPane().add(lblmetin);
+        jf.getContentPane().add(pass);
+
+        btn1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                String metin ar1.getText();
+                String kelime() = metin.split("\\s");
+                lblmetin.setText("Karakter sayısı:" +metin.length()); lblKelime.setText("Kelime Sayısı:" + kelime.length);
+            }
+        });
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}

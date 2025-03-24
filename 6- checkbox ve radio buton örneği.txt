@@ -1,0 +1,50 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+        jf.setLocation(100,200);
+        getContentPane().setLayout(new FlowLayout());
+        JCheckBox cbE= new JCheckBox("Evet");
+        JCheckBox cbH= new JCheckBox("Hayır");
+        cbE.setBounds(200, 200,50,50);
+        JRadioButton rb1 = new JRadioButton("Erkek");
+        jf.getContentPane().add(rb1);
+        jf.getContentPane().add(cbE);
+        jf.getContentPane().add(cbH);
+        JButton btn5= new JButton("Seçilen");
+        jf.getContentPane().add(btn5);
+
+        String str []= {"C","C#","Java","PHP"};
+
+        JComboBox cbox = new JComboBox(str);
+
+        JScrollBar s = new JScrollBar(JScrollBar.VERTICAL)
+        jf.getContentPane().add(s);
+        jf.getContentPane().add(cbox);
+
+        btn5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if (cbE.isSelected())
+                {
+                    System.out.println("Evet Seçildi");
+                }
+                else if (cbH.isSelected())
+                {
+                    System.out.println("Hayır Seçildi");
+                }                
+                else
+                    System.out.println("Hiçbiri Seçilmedi");
+
+                String yaz = "Seçilen Programlama dili"+ cbox.getSelectedIndex();
+                System.out.println(yaz);
+            }
+        });
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}

@@ -1,0 +1,41 @@
+import javax.swing.JFrame;
+
+public class deneme2{
+    public static void main (String[] args) {
+        JFrame jf = new JFrame();
+        jf.setSize(500,600);
+        jf.setLocation(100,200);
+        JMenuBar mb new JMenuBar();
+        JMenu menu = new JMenu("File");
+        JMenu submenu= new JMenu("New");
+        JMenuItem i2= new JMenuItem("Open File");
+        JMenuItem i3= new JMenuItem("Recent File");
+        JMenuItem i4= new JMenuItem("Close Editor");
+        JMenuItem a1= new JMenuItem("Java Project");
+        JMenuItem a2= new JMenuItem("Maven Project");
+
+        submenu.add(a1);
+        submenu.add(a2);
+
+        menu.add(i2);
+        menu.add(i3);
+        menu.add(i4);
+
+        menu.add(submenu);
+
+        mb.add(menu);
+
+        js.setJMenuBar(mb);
+
+        i2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                JOptionPane.showMessageDialog(i2, "menüye tıklandı");
+            }
+        });
+
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}
